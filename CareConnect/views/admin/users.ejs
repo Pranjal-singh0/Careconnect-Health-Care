@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Users</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">👤 Registered Users</h2>
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (users.length > 0) { %>
+          <% users.forEach((user, index) => { %>
+          
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= user.username %></td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="2" class="text-center">No users found.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <a href="/admin/dashboard" class="btn btn-secondary mt-3">← Back to Dashboard</a>
+  </div>
+</body>
+</html>

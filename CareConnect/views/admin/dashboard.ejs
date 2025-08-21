@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    h1 {
+      font-weight: 600;
+      color: #343a40;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .btn {
+      width: 180px;
+      font-size: 1.1rem;
+      margin-top: 20px;
+    }
+
+    .text-center a {
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">🛠 Admin Dashboard</h1>
+
+    <div class="row mb-4 justify-content-center">
+      <div class="col-md-5 mb-3">
+        <div class="card text-white bg-primary">
+          <div class="card-body text-center">
+            <h5 class="card-title">Total Users</h5>
+            <p class="card-text fs-3"><%= userCount %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 mb-3">
+        <div class="card text-white bg-success">
+          <div class="card-body text-center">
+            <h5 class="card-title">Total Inventory Items</h5>
+            <p class="card-text fs-3"><%= inventoryCount %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="/admin/users" class="btn btn-outline-dark">👥 View Users</a>
+      <a href="/admin/chats" class="btn btn-outline-secondary">💬 View Chat Logs</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareConnect | Landing Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .hero {
+      background: linear-gradient(to right, #007bff, #00c6ff);
+      color: white;
+      padding: 120px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+    .footer {
+      background: #343a40;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    /* Toast container position */
+    #toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1055;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">CareConnect</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="btn btn-primary ms-2" href="/login">Login</a></li>
+          <li class="nav-item"><a class="btn btn-success ms-2" href="/register">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to CareConnect</h1>
+    <p>Your all-in-one Healthcare & Mental Wellness Platform</p>
+    <a href="/login" class="btn btn-light btn-lg mt-3 shadow">Get Started</a>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container my-5">
+    <h2 class="text-center mb-4">About CareConnect</h2>
+    <p class="text-center">CareConnect integrates medical inventory tracking and mental health support into one unified platform. We aim to provide hospitals, clinics, and individuals with tools for healthcare efficiency and emotional well-being.</p>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="container my-5">
+    <h2 class="text-center mb-4">Our Features</h2>
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5>📦 Inventory Management</h5>
+          <p>Track medicines and medical supplies with alerts for low stock.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5>💬 Mental Health Chat</h5>
+          <p>Confidential AI-assisted mental health support sessions.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5>🛠️ Admin Dashboard</h5>
+          <p>Manage users, monitor chats, and handle inventory alerts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container my-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <form class="row g-3" action="/contact" method="POST">
+      <div class="col-md-6">
+        <label class="form-label">Full Name</label>
+        <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+      </div>
+      <div class="col-md-12">
+        <label class="form-label">Subject</label>
+        <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+      </div>
+      <div class="col-md-12">
+        <label class="form-label">Message</label>
+        <textarea name="message" class="form-control" rows="5" placeholder="Write your message..." required></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary px-4">Send Message</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 CareConnect | All Rights Reserved</p>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // Function to create a Bootstrap toast dynamically
+    function showToast(message) {
+      const toastId = "toast-" + Date.now();
+      const toastHTML = `
+        <div id="${toastId}" class="toast align-items-center text-bg-primary border-0 mb-2" role="alert">
+          <div class="d-flex">
+            <div class="toast-body">
+              🔔 ${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>`;
+      document.getElementById("toast-container").insertAdjacentHTML("beforeend", toastHTML);
+
+      const toastEl = document.getElementById(toastId);
+      const toast = new bootstrap.Toast(toastEl, { delay: 5000 });
+      toast.show();
+    }
+
+    // Receive notification from server
+    socket.on("notification", (msg) => {
+      showToast(msg);
+    });
+  </script>
+</body>
+</html>

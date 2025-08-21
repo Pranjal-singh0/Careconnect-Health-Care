@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Logs</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">💬 Chat History</h2>
+    <% if (Object.keys(chatData).length > 0) { %>
+      <% Object.keys(chatData).forEach(userId => { %>
+        <div class="mb-4 border p-3 rounded">
+          <h5>User: <%= userId %></h5>
+          <ul class="list-group">
+            <% chatData[userId].forEach((entry, idx) => { %>
+              <li class="list-group-item">
+                <strong>You:</strong> <%= entry.user %><br>
+                <strong>AI:</strong> <%= entry.bot %>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="text-muted">No chat logs available.</p>
+    <% } %>
+    <a href="/admin/dashboard" class="btn btn-secondary mt-3">← Back to Dashboard</a>
+  </div>
+</body>
+</html>

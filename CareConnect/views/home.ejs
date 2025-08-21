@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CareConnect - Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar {
+      background: linear-gradient(90deg, #0062E6, #33AEFF);
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+    }
+    .hero p {
+      color: #6c757d;
+      font-size: 1.1rem;
+    }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.12);
+    }
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    .btn {
+      border-radius: 25px;
+      font-weight: 500;
+      padding: 8px 20px;
+    }
+    footer {
+      margin-top: 50px;
+      background: #343a40;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">🏥 CareConnect</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="/logout" class="btn btn-danger ms-2">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero / Welcome -->
+  <section class="hero">
+    <h1>Welcome, <%= username %> 🎉</h1>
+    <p>Your personalized CareConnect Dashboard</p>
+  </section>
+
+  <!-- Dashboard Grid -->
+  <div class="container">
+    <div class="dashboard-grid">
+
+      <div class="card text-center p-4">
+        <h5 class="card-title">🧾 Admin Dashboard</h5>
+        <p class="text-muted">Manage system settings and oversee platform usage.</p>
+        <a href="/admin/dashboard" class="btn btn-primary">Go</a>
+      </div>
+
+      <div class="card text-center p-4">
+        <h5 class="card-title">📦 Inventory Management</h5>
+        <p class="text-muted">Track and manage medical supplies effectively.</p>
+        <a href="/inventory/dashboard" class="btn btn-success">Go</a>
+      </div>
+
+      <div class="card text-center p-4">
+        <h5 class="card-title">💬 Mental Health Chat</h5>
+        <p class="text-muted">Connect securely with AI-assisted mental wellness support.</p>
+        <a href="/mentalHealth/chat" class="btn btn-info">Go</a>
+      </div>
+
+      <div class="card text-center p-4">
+        <h5 class="card-title">👥 View Users (Admin)</h5>
+        <p class="text-muted">View and manage registered users on the platform.</p>
+        <a href="/admin/users" class="btn btn-dark">Go</a>
+      </div>
+
+      <div class="card text-center p-4">
+        <h5 class="card-title">🗂 Chat Logs (Admin)</h5>
+        <p class="text-muted">Access conversation history and monitor usage trends.</p>
+        <a href="/admin/chats" class="btn btn-secondary">Go</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CareConnect | Designed By Pranjal for Healthcare</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
